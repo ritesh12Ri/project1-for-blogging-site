@@ -1,38 +1,35 @@
 const mongoose = require("mongoose")
 
-// { fname: { mandatory}, 
-// lname: {mandatory}, 
-// title: {mandatory, enum[Mr, Mrs, Miss]}, email: {mandatory, valid email, unique}, password: {mandatory} }
-
-
 const authorSchema = new mongoose.Schema({
 
-    firstName : {
-        type :String,
-        required : true
+    firstName: {
+        type: String,
+        required: true,
+        trim: true
     },
-    lastName : {
-        type : String,
-        required : true
+    lastName: {
+        type: String,
+        required: true,
+        trim: true
     },
-    title : {
-        type : String,
-        enum: [Mr, Mrs, Miss]
+    title: {
+        type: String,
+        enum: ["Mr", "Mrs", "Miss"]
     },
-    email : {
-        type :String,
-        required : true,
-        trim :true,
-        unique : true,
-        lowercase :true,
-        match : ["/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/"],
-        
+    email: {
+        type: String,
+        required: true,
+        trim: true,
+        unique: true,
+        Uppercase: false,
+        Lowercase: true,
+        match: [/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/, 'please fill the valid email address']
     },
-    password : {
-        type : String,
-        required : true
+    password: {
+        type: String,
+        required: true
     }
-   
-})
 
-module.exports = mongoose.model('Author',authorSchema)
+}, { timestamps: true })
+
+module.exports = mongoose.model('Author', authorSchema)
